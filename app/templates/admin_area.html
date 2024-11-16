@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <!-- Sidebar Navigation -->
+  <div class="flex">
+    <aside class="w-64 bg-gray-800 text-white h-screen">
+      <div class="p-6 text-center">
+        <h2 class="text-2xl font-bold">Admin Dashboard</h2>
+        <p class="mt-2 text-sm">Welcome, Admin!</p>
+      </div>
+      <nav>
+        <ul class="space-y-4">
+          <li><a href="/admin-dashboard" class="block px-6 py-3 hover:bg-gray-700">Dashboard</a></li>
+          <li><a href="/customer-inquiries" class="block px-6 py-3 hover:bg-gray-700">Customer Inquiries</a></li>
+          <li><a href="/logout" class="block px-6 py-3 hover:bg-gray-700">Logout</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 p-8">
+      <header class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold">Customer Inquiries</h1>
+        <a href="/logout" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Logout</a>
+      </header>
+
+      <!-- Statistics Section -->
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <!-- Total Inquiries -->
+        <div class="bg-white p-6 rounded shadow text-center">
+          <h2 class="text-xl font-bold text-blue-600">Total Inquiries</h2>
+          <p class="text-3xl font-semibold mt-2">124</p>
+        </div>
+        <!-- Pending Inquiries -->
+        <div class="bg-white p-6 rounded shadow text-center">
+          <h2 class="text-xl font-bold text-teal-600">Pending Inquiries</h2>
+          <p class="text-3xl font-semibold mt-2">36</p>
+        </div>
+        <!-- Resolved Inquiries -->
+        <div class="bg-white p-6 rounded shadow text-center">
+          <h2 class="text-xl font-bold text-green-600">Resolved Inquiries</h2>
+          <p class="text-3xl font-semibold mt-2">88</p>
+        </div>
+      </section>
+
+      <!-- Inquiries Table -->
+      <section>
+        <div class="bg-white rounded shadow">
+          <header class="bg-gray-200 p-4 rounded-t">
+            <h3 class="font-semibold text-gray-700">Recent Inquiries</h3>
+          </header>
+          <table class="w-full table-auto text-sm text-left">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="px-6 py-3">Name</th>
+                <th class="px-6 py-3">Email</th>
+                <th class="px-6 py-3">Phone</th>
+                <th class="px-6 py-3">Company</th>
+                <th class="px-6 py-3">Country</th>
+                <th class="px-6 py-3">Job Title</th>
+                <th class="px-6 py-3">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Example Row -->
+              <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4">{{CustomerInquiry.name}}</td>
+                <td class="px-6 py-4">{{CustomerInquiry.email}}</td>
+                <td class="px-6 py-4">{{CustomerInquiry.phone_number}}</td>
+                <td class="px-6 py-4">{{CustomerInquiry.company_name}}</td>
+                <td class="px-6 py-4">{{CustomerInquiry.Country}}</td>
+                <td class="px-6 py-4">{{CustomerInquiry.job_title}}</td>
+                <td class="px-6 py-4">{{CustomerInquiry.job_details}}</td>
+                
+                <!-- Add Edit and Delete Buttons -->
+                <td class="px-6 py-4">
+                  <a href="#" class="text-blue-500 hover:underline">View</a>
+                  <a href="#" class="text-red-500 hover:underline ml-4">Delete</a>
+                </td>
+              </tr>
+              <!-- Repeat for other inquiries -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
