@@ -8,5 +8,6 @@ urlpatterns = [
     path('thankyou/', thank_you, name='thank_you'),
     path('customer/', customer, name="customer"),
     path('inquiry/<int:id>/',view_inquiry, name="inquiry"),
+    path('submit-feedback/', submit_feedback, name='submit_feedback'),
 ]
 

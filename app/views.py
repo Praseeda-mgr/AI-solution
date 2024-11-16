@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect
-from .models import SoftwareSolution, CustomerInquiry
-from .forms import CustomerInquiryForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import SoftwareSolution, CustomerInquiry, Feedback
+from .forms import CustomerInquiryForm, FeedbackForm
 
 def home(request):
     solutions = SoftwareSolution.objects.all()
-    return render(request, "home.html", {"solutions": solutions})
+    form = CustomerInquiryForm()
+    feedback_form = FeedbackForm()
+    return render(request, "home.html", {"solutions": solutions, "form": form, "feedback_form": feedback_form})
 
 def contact_us(request):
     if request.method == "POST":
@@ -29,9 +31,18 @@ def customer(request):
     return render(request, "customer.html")
 
 
+
+def submit_feedback(request):
+    if request.method == "POST":
+        feedback_form = FeedbackForm(request.POST)
+        if feedback_form.is_valid():
+            feedback_form.save()
+            return redirect("home")
+    return redirect("home")
+
+
+
 # View_inquiry details 
-from django.shortcuts import render, get_object_or_404
-from .models import CustomerInquiry
 def view_inquiry(request, id):
     inquiry = get_object_or_404(CustomerInquiry, id=id)
     return render(request, "view_inquiry.html", {"inquiry": inquiry})

@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
-from django.db import models
-
 class SoftwareSolution(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
@@ -14,7 +12,7 @@ class PastSolution(models.Model):
 
 class Feedback(models.Model):
     customer_name = models.CharField(max_length=100)
-    rating = models.IntegerField()  # Out of 5
+    rating = models.IntegerField()  
     feedback = models.TextField()
 
 class Article(models.Model):
@@ -36,3 +34,8 @@ class CustomerInquiry(models.Model):
     job_title = models.CharField(max_length=100)
     job_details = models.TextField()
     inquiry_date = models.DateTimeField(auto_now_add=True)
+
+
+
+
+
