@@ -6,6 +6,7 @@ urlpatterns = [
     path("contact-us/", contact_us, name="contact_us"),
     path("admin-area/", admin_area, name="admin_area"),
     path('thankyou/', thank_you, name='thank_you'),
-    path('customer/', CustomerInquiry, name="customer"),
+    path('customer/', customer, name="customer"),
+    path('inquiry/<int:id>/',view_inquiry, name="inquiry"),
 ]
 

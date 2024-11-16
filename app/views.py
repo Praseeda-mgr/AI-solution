@@ -25,5 +25,18 @@ def admin_area(request):
 def thank_you(request):
     return render(request, "thank_you.html")
 
-def CustomerInquiry(request):
+def customer(request):
     return render(request, "customer.html")
+
+
+# View_inquiry details 
+from django.shortcuts import render, get_object_or_404
+from .models import CustomerInquiry
+def view_inquiry(request, id):
+    inquiry = get_object_or_404(CustomerInquiry, id=id)
+    return render(request, "view_inquiry.html", {"inquiry": inquiry})
+
+
+def software_solution(request, solution_id):
+    solution = SoftwareSolution.objects.get(id=solution_id)
+    return render(request, "software_solution.html", {"solution": solution})

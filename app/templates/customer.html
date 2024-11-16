@@ -1,40 +1,76 @@
-{% extends 'base_generic.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Customer Inquiries</title>
 
-{% block content %}
-<div class="container mx-auto p-6">
-    <h1 class="text-3xl font-semibold text-center mb-6">Customer Inquiries</h1>
+  <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
-        <table class="min-w-full table-auto">
-            <thead>
-                <tr class="bg-gray-100">
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Job Title</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Job Details</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Country</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for inquiry in inquiries %}
-                    <tr class="border-b hover:bg-gray-50">
-                        <td class="px-6 py-4 text-sm text-gray-800">{{ inquiry.name }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-800">{{ inquiry.email }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-800">{{ inquiry.company_name }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-800">{{ inquiry.job_title }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-800">{{ inquiry.job_details }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-800">{{ inquiry.country }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-800">{{ inquiry.phone }}</td>
-                    </tr>
-                {% empty %}
-                    <tr>
-                        <td colspan="7" class="px-6 py-4 text-sm text-gray-500 text-center">No inquiries available.</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
+</head>
+<body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen">
+
+  <!-- Navbar -->
+<header class="bg-gradient-to-r from-blue-900 to-purple-700 text-white p-4 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-3xl font-bold">AI Solutions - Admin</h1>
+        <nav>
+        <a href="/" class="px-4 py-2 hover:underline">Home</a>
+        <a href="{% url 'admin_area' %}" class="px-4 py-2 hover:underline">Customer Inquiries</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Customer Inquiries Section -->
+<section class="container mx-auto py-16 flex-grow">
+    <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-gray-800">Customer Inquiries</h2>
+    </div>
+
+    <!-- Table of Customer Inquiries -->
+    <div class="overflow-x-auto bg-white rounded-lg shadow-md">
+    <table class="min-w-full table-auto">
+        <thead class="bg-blue-800 text-white">
+        <tr>
+            <th class="px-4 py-2 text-left">Name</th>
+            <th class="px-4 py-2 text-left">Email</th>
+            <th class="px-4 py-2 text-left">Company</th>
+            <th class="px-4 py-2 text-left">Job Title</th>
+            <th class="px-4 py-2 text-left">Country</th>
+            <th class="px-4 py-2 text-left">Inquiry Date</th>
+            <th class="px-4 py-2 text-left">Details</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for inquiry in inquiries %}
+            <tr class="border-b">
+                <td class="px-4 py-2">{{ inquiry.name }}</td>
+                <td class="px-4 py-2">{{ inquiry.email }}</td>
+                <td class="px-4 py-2">{{ inquiry.company_name }}</td>
+                <td class="px-4 py-2">{{ inquiry.job_title }}</td>
+                <td class="px-4 py-2">{{ inquiry.country }}</td>
+                <td class="px-4 py-2">{{ inquiry.inquiry_date }}</td>
+                <td class="px-4 py-2">
+                <a href="{% url 'view_inquiry' inquiry.id %}" class="text-blue-600 hover:underline">View</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center py-4">No inquiries found.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
         </table>
     </div>
-</div>
-{% endblock %}
+</section>
+
+  <!-- Footer -->
+<footer class="bg-gray-800 text-white py-4 mt-16 w-full fixed bottom-0">
+    <div class="container mx-auto text-center">
+    <p>&copy; 2024 AI Solutions. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
