@@ -1,0 +1,71 @@
+{% extends 'navbar_footer.html' %}
+
+{% block content %}
+<body class="bg-gray-50 text-gray-800">
+  <!-- Header -->
+  <header class="bg-blue-600 text-white p-6 shadow">
+    <h1 class="text-3xl font-bold text-center">Gallery</h1>
+  </header>
+
+  <!-- Main Content -->
+  <main class="p-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Loop through the photos -->
+      {% for photo in photos %}
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <!-- Photo -->
+        <img src="{{ photo.photo.url }}" 
+             alt="{{ photo.event_name }}" 
+             class="w-full h-48 object-cover cursor-pointer"
+             onclick="showModal('{{ photo.photo.url }}', '{{ photo.event_name }}', '{{ photo.description|escapejs }}')">
+        
+        <!-- Content -->
+        <div class="p-4">
+          <!-- Event Name -->
+          <h2 class="text-lg font-bold text-gray-800">{{ photo.event_name }}</h2>
+          
+          <!-- Event Date -->
+          <p class="text-sm text-gray-500">{{ photo.event_date }}</p>
+          
+          <!-- Description -->
+          {% if photo.description %}
+          <p class="mt-2 text-gray-700 text-sm">{{ photo.description|truncatewords:15 }}</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div id="photoModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden w-11/12 max-w-3xl">
+      <!-- Modal Header -->
+      <div class="flex justify-between items-center p-4 border-b border-gray-200">
+        <h2 id="modalTitle" class="text-lg font-bold"></h2>
+        <button onclick="closeModal()" class="text-gray-500 hover:text-gray-800">&times;</button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-4">
+        <img id="modalImage" src="" alt="" class="w-full h-auto rounded-lg">
+        <p id="modalDescription" class="mt-4 text-gray-700"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript for Modal -->
+  <script>
+    function showModal(imageUrl, title, description) {
+      document.getElementById('modalImage').src = imageUrl;
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalDescription').innerText = description;
+      document.getElementById('photoModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('photoModal').classList.add('hidden');
+    }
+  </script>
+</body>
+{% endblock %}

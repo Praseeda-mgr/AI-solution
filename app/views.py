@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import SoftwareSolution, CustomerInquiry, Feedback
 from .forms import CustomerInquiryForm, FeedbackForm
 
+def navbar_footer(request):
+    return render(request, 'navbar_footer.html')
+
 def home(request):
     solutions = SoftwareSolution.objects.all()
     form = CustomerInquiryForm()
@@ -51,3 +54,9 @@ def view_inquiry(request, id):
 def software_solution(request, solution_id):
     solution = SoftwareSolution.objects.get(id=solution_id)
     return render(request, "software_solution.html", {"solution": solution})
+
+from django.shortcuts import render
+from .models import PhotoGallery
+def photo_gallery(request):
+    photos = PhotoGallery.objects.filter(is_public=True).order_by('-upload_date')
+    return render(request, 'photo_gallery.html', {'photos': photos})

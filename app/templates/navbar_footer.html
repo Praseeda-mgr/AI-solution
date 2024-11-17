@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Navbar and Footer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+  <!-- Navbar -->
+  <nav class="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow sticky top-0 z-50">
+    <div class="container mx-auto flex items-center justify-between px-4 py-3">
+      <!-- Logo -->
+      <a href="/" class="text-2xl font-bold flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-8 h-8 mr-2">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20l4-16m-8 16l4-16m-4 12h8" />
+        </svg>
+        AI Solutions
+      </a>
+
+      <!-- Navigation Links -->
+      <ul class="hidden md:flex space-x-6">
+        <li><a href="/" class="hover:underline">Home</a></li>
+        <li><a href="photo-gallery/" class="hover:underline">Gallery</a></li>
+        <li><a href="/past-solutions" class="hover:underline">Past Solutions</a></li>
+        <li><a href="/contact-us" class="hover:underline">Contact Us</a></li>
+        <li><a href="/about-us" class="hover:underline">About Us</a></li>
+      </ul>
+
+      <!-- Mobile Menu Toggle -->
+      <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden bg-blue-700 md:hidden">
+      <ul class="flex flex-col space-y-2 py-2 text-center">
+        <li><a href="/" class="block py-2 text-white hover:bg-blue-800">Home</a></li>
+        <li><a href='photo-gallery/' class="block py-2 text-white hover:bg-blue-800">Gallery</a></li>
+        <li><a href="/past-solutions" class="block py-2 text-white hover:bg-blue-800">Past Solutions</a></li>
+        <li><a href="/contact-us" class="block py-2 text-white hover:bg-blue-800">Contact Us</a></li>
+        <li><a href="/about-us" class="block py-2 text-white hover:bg-blue-800">About Us</a></li>
+      </ul>
+    </div>
+  </nav>
+{% block content %}
+{% endblock %}
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-gray-200 fixed bottom-0 left-0 w-full">
+    <div class="container mx-auto py-4 px-4 text-center">
+      <!-- Links -->
+      <div class="flex justify-center space-x-6 mb-2">
+        <a href="/" class="hover:underline">Home</a>
+        <a href="/gallery" class="hover:underline">Gallery</a>
+        <a href="/past-solutions" class="hover:underline">Past Solutions</a>
+        <a href="/contact-us" class="hover:underline">Contact Us</a>
+        <a href="/about-us" class="hover:underline">About Us</a>
+      </div>
+
+      <!-- Social Media -->
+      <div class="flex justify-center space-x-4">
+        <a href="#" class="text-blue-500 hover:text-blue-300"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="text-blue-400 hover:text-blue-200"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="text-pink-500 hover:text-pink-300"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="text-blue-700 hover:text-blue-500"><i class="fab fa-linkedin"></i></a>
+      </div>
+
+      <!-- Copyright -->
+      <p class="mt-2 text-sm">&copy; 2024 AI Solutions. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript for Mobile Menu -->
+  <script>
+    const toggleButton = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    toggleButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

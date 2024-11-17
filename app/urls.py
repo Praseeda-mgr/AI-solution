@@ -9,5 +9,7 @@ urlpatterns = [
     path('customer/', customer, name="customer"),
     path('inquiry/<int:id>/',view_inquiry, name="inquiry"),
     path('submit-feedback/', submit_feedback, name='submit_feedback'),
+    path('photo-gallery/', photo_gallery, name='photo_gallery'),
+    path('navbar_footer/', navbar_footer, name='navbar_footer'),
 ]
 

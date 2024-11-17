@@ -20,10 +20,21 @@ class Article(models.Model):
     content = models.TextField()
     published_date = models.DateField()
 
+from django.db import models
+
 class PhotoGallery(models.Model):
-    event_name = models.CharField(max_length=200)
-    photo = models.ImageField(upload_to="event_photos/")
-    event_date = models.DateField()
+    event_name = models.CharField(max_length=200)  # Name of the event
+    event_date = models.DateField()  # Date when the event occurred
+    photo = models.ImageField(upload_to="event_photos/")  # Path to store uploaded photos
+    description = models.TextField(blank=True, null=True)  # Description of the event or photo
+    uploaded_by = models.CharField(max_length=100, blank=True, null=True)  # Name of the uploader
+    upload_date = models.DateTimeField(auto_now_add=True)  # Timestamp of upload
+    is_featured = models.BooleanField(default=False)  # Highlight the photo as featured
+    location = models.CharField(max_length=255, blank=True, null=True)  # Location of the event
+    is_public = models.BooleanField(default=True)  # Determines if the photo is publicly visible
+
+    def __str__(self):
+        return f"{self.event_name} ({self.event_date})"
 
 class CustomerInquiry(models.Model):
     name = models.CharField(max_length=100)
