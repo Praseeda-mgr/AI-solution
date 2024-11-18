@@ -20,21 +20,23 @@ class Article(models.Model):
     content = models.TextField()
     published_date = models.DateField()
 
-from django.db import models
-
 class PhotoGallery(models.Model):
-    event_name = models.CharField(max_length=200)  # Name of the event
-    event_date = models.DateField()  # Date when the event occurred
-    photo = models.ImageField(upload_to="event_photos/")  # Path to store uploaded photos
-    description = models.TextField(blank=True, null=True)  # Description of the event or photo
-    uploaded_by = models.CharField(max_length=100, blank=True, null=True)  # Name of the uploader
-    upload_date = models.DateTimeField(auto_now_add=True)  # Timestamp of upload
-    is_featured = models.BooleanField(default=False)  # Highlight the photo as featured
-    location = models.CharField(max_length=255, blank=True, null=True)  # Location of the event
-    is_public = models.BooleanField(default=True)  # Determines if the photo is publicly visible
+    name = models.CharField(max_length=255)  # Name of the gallery or album
+    description = models.TextField(blank=True, null=True)  # Optional description
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.event_name} ({self.event_date})"
+        return self.name
+
+class Photo(models.Model):
+    gallery = models.ForeignKey(PhotoGallery, on_delete=models.CASCADE, related_name='event_photos')
+    image = models.ImageField(upload_to='event_photos/')  # Upload folder: 'media/photos/'
+    caption = models.CharField(max_length=255, blank=True, null=True)  # Optional caption
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Photo in {self.gallery.name}"
+
 
 class CustomerInquiry(models.Model):
     name = models.CharField(max_length=100)

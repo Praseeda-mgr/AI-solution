@@ -1,5 +1,5 @@
 from django import forms
-from .models import CustomerInquiry, Feedback
+from .models import CustomerInquiry, Feedback, Article
 
 class CustomerInquiryForm(forms.ModelForm):
     class Meta:
@@ -13,3 +13,10 @@ class FeedbackForm(forms.ModelForm):
         widgets = {
             'feedback': forms.Textarea(attrs={'rows': 4}),
         }
+
+class ArticleForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        fields = ['title', 'content', 'published_date']
+
+

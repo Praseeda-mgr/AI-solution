@@ -1,0 +1,17 @@
+{% extends 'navbar_footer.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto my-10 p-6 bg-white shadow-md rounded-lg">
+    
+    {% for article in articles %}
+        <div class="mb-6">
+            <h2 class="text-2xl font-semibold mb-2">{{ article.title }}</h2>
+            <p class="text-sm text-gray-500 mb-2">Published on: {{ article.published_date }}</p>
+            <p class="text-lg">{{ article.content|truncatewords:50 }}</p>
+            <a href="{% url 'article_detail' article.id %}" class="text-indigo-600 hover:text-indigo-800">Read more</a>
+        </div>
+    {% empty %}
+        <p>No articles available at the moment.</p>
+    {% endfor %}
+</div>
+{% endblock %}

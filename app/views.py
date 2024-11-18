@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import SoftwareSolution, CustomerInquiry, Feedback
+from .models import SoftwareSolution, CustomerInquiry, Feedback, Article
 from .forms import CustomerInquiryForm, FeedbackForm
 
 def navbar_footer(request):
@@ -33,6 +33,17 @@ def thank_you(request):
 def customer(request):
     return render(request, "customer.html")
 
+def article_list(request):
+    articles= Article.objects.all().order_by('-published_date')
+    return render(request, 'articles.html', {'articles': articles})
+
+
+
+def article_detail(request, id):
+    # Fetch the article by its ID, or return a 404 error if not found
+    article = get_object_or_404(Article, id=id)
+    # Render the article_detail template with the article context
+    return render(request, 'article_detail.html', {'article': article})
 
 
 def submit_feedback(request):
@@ -42,8 +53,6 @@ def submit_feedback(request):
             feedback_form.save()
             return redirect("home")
     return redirect("home")
-
-
 
 # View_inquiry details 
 def view_inquiry(request, id):
@@ -55,8 +64,3 @@ def software_solution(request, solution_id):
     solution = SoftwareSolution.objects.get(id=solution_id)
     return render(request, "software_solution.html", {"solution": solution})
 
-from django.shortcuts import render
-from .models import PhotoGallery
-def photo_gallery(request):
-    photos = PhotoGallery.objects.filter(is_public=True).order_by('-upload_date')
-    return render(request, 'photo_gallery.html', {'photos': photos})
