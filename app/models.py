@@ -18,7 +18,9 @@ class Feedback(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
+    writer = models.CharField(max_length=100, default='Anonymous') 
     published_date = models.DateField()
+
 
 class PhotoGallery(models.Model):
     name = models.CharField(max_length=255)  # Name of the gallery or album

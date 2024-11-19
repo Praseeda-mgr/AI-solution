@@ -6,10 +6,11 @@ def navbar_footer(request):
     return render(request, 'navbar_footer.html')
 
 def home(request):
+    articles = Article.objects.all()[:4]
     solutions = SoftwareSolution.objects.all()
     form = CustomerInquiryForm()
     feedback_form = FeedbackForm()
-    return render(request, "home.html", {"solutions": solutions, "form": form, "feedback_form": feedback_form})
+    return render(request, "home.html", {"solutions": solutions, "form": form, "feedback_form": feedback_form, 'articles': articles})
 
 def contact_us(request):
     if request.method == "POST":
@@ -35,9 +36,10 @@ def customer(request):
 
 def article_list(request):
     articles= Article.objects.all().order_by('-published_date')
+    print(f"Found {articles.count()} articles.")  # Ensure this shows the correct number
     return render(request, 'articles.html', {'articles': articles})
 
-
+    
 
 def article_detail(request, id):
     # Fetch the article by its ID, or return a 404 error if not found
