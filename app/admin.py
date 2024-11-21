@@ -10,3 +10,4 @@ admin.site.register(CustomerInquiry)
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'writer', 'published_date')
     search_fields = ('title', 'writer')
+

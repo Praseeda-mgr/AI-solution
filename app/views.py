@@ -1,9 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import login
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import check_password
 from .models import SoftwareSolution, CustomerInquiry, Feedback, Article
 from .forms import CustomerInquiryForm, FeedbackForm
 
 def navbar_footer(request):
     return render(request, 'navbar_footer.html')
+
+def about_us(request):
+    return render(request, "about_us.html")
 
 def home(request):
     articles = Article.objects.all()[:4]

@@ -3,6 +3,7 @@ from app.views import *
 
 urlpatterns = [
     path('navbar_footer/', navbar_footer, name='navbar_footer'),
+    path("about_us/", about_us, name='about_us'),
     path("", home, name="home"),
     path("contact-us/", contact_us, name="contact_us"),
     path("admin-area/", admin_area, name="admin_area"),
