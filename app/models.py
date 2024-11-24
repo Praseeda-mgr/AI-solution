@@ -10,7 +10,7 @@ class PastSolution(models.Model):
     industry = models.CharField(max_length=200)
     description = models.TextField()
 
-class Feedback(models.Model):
+class Feedbacks(models.Model):
     customer_name = models.CharField(max_length=100)
     rating = models.IntegerField()  
     feedback = models.TextField()

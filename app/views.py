@@ -1,8 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login
-from django.contrib.auth.models import User
-from django.contrib.auth.hashers import check_password
-from .models import SoftwareSolution, CustomerInquiry, Feedback, Article
+from .models import SoftwareSolution, CustomerInquiry, Feedbacks, Article
 from .forms import CustomerInquiryForm, FeedbackForm
 
 def navbar_footer(request):
