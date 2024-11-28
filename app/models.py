@@ -10,11 +10,6 @@ class PastSolution(models.Model):
     industry = models.CharField(max_length=200)
     description = models.TextField()
 
-class Feedbacks(models.Model):
-    customer_name = models.CharField(max_length=100)
-    rating = models.IntegerField()  
-    feedback = models.TextField()
-
 class Article(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
@@ -48,7 +43,6 @@ class CustomerInquiry(models.Model):
     country = models.CharField(max_length=100)
     job_title = models.CharField(max_length=100)
     job_details = models.TextField()
-    inquiry_date = models.DateTimeField(auto_now_add=True)
 
 
 
