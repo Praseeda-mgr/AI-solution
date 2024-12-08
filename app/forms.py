@@ -1,5 +1,5 @@
 from django import forms
-from .models import CustomerInquiry, Article
+from .models import CustomerInquiry, Article, Feedback
 
 class CustomerInquiryForm(forms.ModelForm):
     class Meta:
@@ -29,5 +29,17 @@ class ArticleForm(forms.ModelForm):
                 'placeholder': 'Enter the writer\'s name',
             }),
         }
+
+
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ['name', 'rating', 'message']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Your Name'}),
+            'rating': forms.Select(attrs={'class': 'form-select'}),
+            'message': forms.Textarea(attrs={'class': 'form-textarea', 'placeholder': 'Your Message'}),
+        }
+
 
 

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from .models import SoftwareSolution, CustomerInquiry, Article
-from .forms import CustomerInquiryForm
+from .models import Solution,PastSolution, CustomerInquiry, Article, Feedback
+from .forms import CustomerInquiryForm, FeedbackForm
 
 def navbar_footer(request):
     return render(request, 'navbar_footer.html')
@@ -10,7 +10,7 @@ def about_us(request):
 
 def home(request):
     articles = Article.objects.all()[:4]
-    solutions = SoftwareSolution.objects.all()
+    solutions = Solution.objects.all()
     form = CustomerInquiryForm()
     return render(request, "home.html", {"solutions": solutions, "form": form, 'articles': articles})
 
@@ -26,13 +26,9 @@ def contact_us(request):
     return render(request, "contact_us.html", {"form": form})
 
 
-def thank_you(request):
-    return render(request, "thank_you.html")
-
-
 def article_list(request):
     articles= Article.objects.all().order_by('-published_date')
-    print(f"Found {articles.count()} articles.")  # Ensure this shows the correct number
+    print(f"Found {articles.count()} articles.") 
     return render(request, 'articles.html', {'articles': articles})
 
     
@@ -42,16 +38,26 @@ def article_detail(request, id):
     return render(request, 'article_detail.html', {'article': article})
 
 
-def submit_feedback(request):
-    if request.method == "POST":
-        feedback_form = FeedbackForm(request.POST)
-        if feedback_form.is_valid():
-            feedback_form.save()
-            return redirect("home")
-    return redirect("home")
+def solutions_list(request):
+    solutions = Solution.objects.all().order_by('-created_at')
+    return render(request, 'solutions.html', {'solutions': solutions})
 
+def past_solutions(request):
+    solutions = PastSolution.objects.all()
+    return render(request, 'past_solutions.html', {'solutions': solutions})
 
-def software_solution(request, solution_id):
-    solution = SoftwareSolution.objects.get(id=solution_id)
-    return render(request, "software_solution.html", {"solution": solution})
+def feedback(request):
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('feedback_success')  # Redirect after successful submission
+    else:
+        form = FeedbackForm()
 
+    feedback_list = Feedback.objects.all().order_by('-created_at')  # Show all feedback (optional)
+    return render(request, 'feedback.html', {'form': form, 'feedback_list': feedback_list})
+
+def solution_detail(request, id):
+    solution = get_object_or_404(Solution, id=id)
+    return render(request, 'solution_detail.html', {'solution': solution})

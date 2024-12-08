@@ -1,0 +1,37 @@
+{% extends 'navbar_footer.html' %}
+
+{% block content %}
+<body class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-screen flex flex-col items-center justify-center">
+    <div class="container mx-auto py-8">
+        <!-- Success Feedback Toast -->
+        <div id="success-toast" class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg opacity-0 transition-opacity duration-500">
+            <p class="font-semibold">Success! Your feedback has been submitted.</p>
+        </div>
+
+        <!-- Confirmation Message -->
+        <div class="bg-white bg-opacity-60 backdrop-blur-lg p-8 rounded-lg shadow-xl max-w-lg mx-auto">
+            <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6">Thank You for Your Feedback!</h2>
+            <p class="text-lg text-gray-600 text-center">Your feedback has been successfully submitted. We appreciate your input!</p>
+        </div>
+    </div>
+
+    <script>
+        // Display success message on page load
+        window.onload = function() {
+            showSuccessToast();
+        };
+
+        function showSuccessToast() {
+            const toast = document.getElementById('success-toast');
+            toast.classList.remove('opacity-0');
+            toast.classList.add('opacity-100');
+            
+            // Hide toast after 3 seconds
+            setTimeout(function () {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+{% endblock %}
