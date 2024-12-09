@@ -1,0 +1,26 @@
+{% extends 'navbar_footer.html' %}
+{% block content %}
+<body class="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 min-h-screen">
+    <main class="container mx-auto mt-12 px-4">
+        <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+            {% if solution.image %}
+            <img src="{{ solution.image.url }}" alt="{{ solution.title }}" class="w-full h-48 object-contain">
+            {% else %}
+            <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-500">
+                <svg class="w-12 h-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            {% endif %}
+            <div class="p-6">
+                <h1 class="text-3xl font-extrabold text-gray-800 mb-4">{{ solution.title }}</h1>
+                <p class="text-lg text-gray-500 uppercase mb-4">{{ solution.industry }}</p>
+                <p class="text-gray-700 text-base mb-6">{{ solution.description }}</p>
+                <a href="{% url 'past_solutions' %}" class="inline-block bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors duration-200">
+                    Back to Past Solutions
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+{% endblock %}

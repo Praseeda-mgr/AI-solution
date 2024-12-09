@@ -1,22 +1,37 @@
 {% extends 'navbar_footer.html' %}
 {% block content %}
-
 <body class="bg-gray-100">
-    <main class="container mx-auto py-8">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <main class="container mx-auto py-12 px-6">
+        <!-- Section Title -->
+        <div class="text-center mb-10">
+            <h2 class="text-4xl font-extrabold text-gray-800 mb-2">Our AI-Driven Solutions</h2>
+            <p class="text-lg text-gray-600">Explore the innovative solutions we offer to transform industries.</p>
+        </div>
+
+        <!-- Solution Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {% for solution in solutions %}
-            <a href="{% url 'solution_detail' solution.id %}" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105">
+            <a href="{% url 'solution_detail' solution.id %}" class="group bg-white rounded-lg shadow-xl hover:shadow-2xl transition-all transform hover:scale-105">
                 {% if solution.image %}
-                <img src="{{ solution.image.url }}" alt="{{ solution.title }}" class="w-full h-40 object-cover">
+                <img src="{{ solution.image.url }}" alt="{{ solution.title }}" class="w-full h-48 object-contain rounded-t-lg">
+                {% else %}
+                <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-500 rounded-t-lg">
+                    <svg class="w-16 h-16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
                 {% endif %}
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold text-gray-800">{{ solution.title }}</h2>
-                    <p class="text-gray-600 mt-2">{{ solution.description|truncatechars:100 }}</p>
-                    <p class="text-sm text-gray-500 mt-4">Added on: {{ solution.created_at|date:"F j, Y" }}</p>
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-200">{{ solution.title }}</h2>
+                    <p class="text-gray-600 mt-3 text-sm group-hover:text-gray-700 transition-colors duration-200">{{ solution.description|truncatechars:100 }}</p>
+                    <div class="flex items-center justify-between mt-4">
+                        <p class="text-sm text-gray-500">{{ solution.created_at|date:"F j, Y" }}</p>
+                        <span class="text-blue-600 font-semibold">Learn More</span>
+                    </div>
                 </div>
             </a>
             {% endfor %}
         </div>
     </main>
-
+</body>
 {% endblock %}

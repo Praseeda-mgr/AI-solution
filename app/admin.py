@@ -1,12 +1,14 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Solution, PastSolution, Article, CustomerInquiry, Feedback
+from .models import Solution, PastSolution, Article, CustomerInquiry, Feedback, Album, Photo
 
 admin.site.register(Solution)
 admin.site.register(PastSolution)
 admin.site.register(Article)
 admin.site.register(CustomerInquiry)
 admin.site.register(Feedback)
+admin.site.register(Album)
+admin.site.register(Photo)
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'writer', 'published_date')

@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-# Create your models here.
 
 class Solution(models.Model):
     title = models.CharField(max_length=200) 
@@ -27,22 +26,24 @@ class Article(models.Model):
     writer = models.CharField(max_length=100, default='Anonymous') 
     published_date = models.DateField()
 
-class PhotoGallery(models.Model):
-    name = models.CharField(max_length=255)  # Name of the gallery or album
-    description = models.TextField(blank=True, null=True)  # Optional description
+
+class Album(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
 
 class Photo(models.Model):
-    gallery = models.ForeignKey(PhotoGallery, on_delete=models.CASCADE, related_name='event_photos')
-    image = models.ImageField(upload_to='event_photos/')  # Upload folder: 'media/photos/'
-    caption = models.CharField(max_length=255, blank=True, null=True)  # Optional caption
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='photos', null=True, blank=True)  
+    image = models.ImageField(upload_to='album_photos/')
+    caption = models.CharField(max_length=200, blank=True, null=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Photo in {self.gallery.name}"
+        return f"Photo in {self.album.name if self.album else 'No Album'}"
+
 
 
 class CustomerInquiry(models.Model):
@@ -57,7 +58,7 @@ class CustomerInquiry(models.Model):
 
 class Feedback(models.Model):
     name = models.CharField(max_length=100)  
-    rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)])  # Rating (1 to 5 stars)
+    rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)])  
     message = models.TextField(blank=True)  
     created_at = models.DateTimeField(auto_now_add=True) 
 

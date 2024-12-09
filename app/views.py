@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from .models import Solution,PastSolution, CustomerInquiry, Article, Feedback
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Solution,PastSolution, CustomerInquiry, Article, Feedback, Album
 from .forms import CustomerInquiryForm, FeedbackForm
 
 def navbar_footer(request):
@@ -43,8 +43,14 @@ def solutions_list(request):
     return render(request, 'solutions.html', {'solutions': solutions})
 
 def past_solutions(request):
-    solutions = PastSolution.objects.all()
-    return render(request, 'past_solutions.html', {'solutions': solutions})
+    past_solutions = PastSolution.objects.all()
+    return render(request, 'past_solutions.html', {'past_solutions': past_solutions})
+
+
+def past_solution_details(request, pk):
+    solution = get_object_or_404(PastSolution, pk=pk)
+    return render(request, 'past_details.html', {'solution': solution})
+
 
 def feedback(request):
     if request.method == 'POST':
@@ -61,3 +67,13 @@ def feedback(request):
 def solution_detail(request, id):
     solution = get_object_or_404(Solution, id=id)
     return render(request, 'solution_detail.html', {'solution': solution})
+
+def album_list(request):
+    albums = Album.objects.all()
+    return render(request, 'album_list.html', {'albums': albums})
+
+
+def album_detail(request, album_id):
+    album = get_object_or_404(Album, pk=album_id)
+    photos = album.photos.all() 
+    return render(request, 'album_detail.html', {'album': album, 'photos': photos})
