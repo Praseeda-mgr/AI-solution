@@ -57,11 +57,10 @@ def feedback(request):
         form = FeedbackForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('feedback_success')  # Redirect after successful submission
+            return redirect('feedback_success')  
     else:
         form = FeedbackForm()
-
-    feedback_list = Feedback.objects.all().order_by('-created_at')  # Show all feedback (optional)
+    feedback_list = Feedback.objects.all().order_by('-created_at')  
     return render(request, 'feedback.html', {'form': form, 'feedback_list': feedback_list})
 
 def solution_detail(request, id):

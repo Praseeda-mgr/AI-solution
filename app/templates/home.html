@@ -5,24 +5,25 @@
 <!-- Tailwind CSS via CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-</head>
-<body class="bg-gray-100 text-gray-800">
+
+<body class="bg-gray-100 text-gray-800 bg-cover bg-center bg-no-repeat" style="background-image: url('https://files.oaiusercontent.com/file-MitTMutYNYmW8tnBYARQ8D?se=2024-12-10T10%3A15%3A01Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dd0879a1e-c9d9-41a8-a7f5-c83849b28d42.webp&sig=GwpDKzc%2B4mqI0D9NIsx7ea4xUwzWTnRSXx46zr%2B3Vvo%3D');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+">
 
 <!-- Hero Section -->
 <section 
-  class="hero-section text-white py-16 text-center relative bg-cover bg-center bg-no-repeat" 
-  style="background-image: url('https://files.oaiusercontent.com/file-341KY7PMDVJtFoVJs53WGs?se=2024-12-08T05%3A54%3A04Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dec558123-7ae7-4d68-ad69-b576cf559ba2.webp&sig=xtBIxaBfKsWx8BFScSXwhVPxNLaU3psYoOOEIhBjlRM%3D');">
+  class="hero-section text-white py-16 text-center relative">
   <div class="container mx-auto px-4 relative z-10">
       <h2 class="text-4xl md:text-5xl font-bold">Empowering Businesses with AI-Driven Solutions</h2>
       <p class="mt-4 text-lg md:text-xl">Harness the power of AI to transform your industry</p>
       <a href="/solutions/" class="mt-8 inline-block bg-white text-blue-800 font-semibold px-8 py-3 rounded-full hover:bg-gray-200 transition duration-200">
         Discover Our Solutions
     </a>
-    
   </div>
   <div class="absolute inset-0 bg-black opacity-40 z-0"></div>
 </section>
-
 
 <section class="py-16 bg-gray-100">
   <div class="container mx-auto text-center px-4">
@@ -49,8 +50,6 @@
   </div>
 </section>
 
-
-
 <!-- Articles Section -->
 <section class="py-16 bg-gray-100">
     <div class="container mx-auto text-center px-4">
@@ -70,35 +69,57 @@
     </div>
 </section>
 
-<!-- Feedback Form Section -->
+<!-- Feedback Form Section --> 
 <section id="feedback" class="py-16 bg-gray-100">
   <div class="container mx-auto text-center px-4">
-      <h3 class="text-3xl font-bold text-gray-800">We Value Your Feedback</h3>
-      <p class="text-gray-600 mt-2 mb-8">Share your thoughts to help us improve our AI solutions</p>
+    <h3 class="text-3xl font-bold text-gray-800">We Value Your Feedback</h3>
+    <p class="text-gray-600 mt-2 mb-8">Share your thoughts to help us improve our AI solutions</p>
+    <!-- Feedback Form -->
+    <form method="POST" action="{% url 'feedback' %}" class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg">
+      {% csrf_token %}
+      <div class="mb-4">
+        <label for="name" class="block text-sm font-semibold text-gray-800">Your Name</label>
+        <input type="text" id="name" name="name" class="w-full mt-2 p-2 border rounded-lg" placeholder="Enter your name" required>
+      </div>
+      <div class="mb-4">
+        <label for="rating" class="block text-sm font-semibold text-gray-800">Rating (1-5)</label>
+        <select id="rating" name="rating" class="w-full mt-2 p-2 border rounded-lg" required>
+          <option value="" disabled selected>Select your rating</option>
+          {% for i in "12345" %}
+          <option value="{{ i }}">{{ i }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="message" class="block text-sm font-semibold text-gray-800">Your Message</label>
+        <textarea id="message" name="message" rows="4" class="w-full mt-2 p-2 border rounded-lg" placeholder="Enter your feedback"></textarea>
+      </div>
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200">Submit Feedback</button>
+    </form>
 
-      <form method="POST" action="{% url 'feedback' %}" class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg">
-          {% csrf_token %}
-          <div class="mb-4">
-              <label for="name" class="block text-sm font-semibold text-gray-800">Your Name</label>
-              <input type="text" id="name" name="name" class="w-full mt-2 p-2 border rounded-lg" placeholder="Enter your name" required>
-          </div>
-          <div class="mb-4">
-              <label for="rating" class="block text-sm font-semibold text-gray-800">Rating (1-5)</label>
-              <select id="rating" name="rating" class="w-full mt-2 p-2 border rounded-lg" required>
-                  <option value="" disabled selected>Select your rating</option>
-                  {% for i in "12345" %}
-                  <option value="{{ i }}">{{ i }}</option>
-                  {% endfor %}
-              </select>
-          </div>
-          <div class="mb-4">
-              <label for="message" class="block text-sm font-semibold text-gray-800">Your Message</label>
-              <textarea id="message" name="message" rows="4" class="w-full mt-2 p-2 border rounded-lg" placeholder="Enter your feedback"></textarea>
-          </div>
-          <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200">Submit Feedback</button>
-      </form>
+  <!-- Feedback List -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    {% for feedback in feedback_list %}
+    <div class="p-6 bg-white rounded-lg shadow-lg">
+      <h3 class="text-lg font-semibold text-gray-800">{{ feedback.name }}</h3>
+      <p class="text-yellow-500 mt-2">
+        {% for star in "★★★★★"|slice:":feedback.rating" %}★{% endfor %}
+        {% for empty_star in "☆☆☆☆☆"|slice:":5-feedback.rating" %}☆{% endfor %}
+      </p>
+      <p class="text-gray-600 mt-4">{{ feedback.message }}</p>
+      <p class="text-xs text-gray-500 mt-4">Submitted on {{ feedback.created_at|date:"M d, Y H:i" }}</p>
+    </div>
+    {% endfor %}
   </div>
+
+  <!-- No Feedback Message -->
+  {% if not feedback_list %}
+  <p class="text-center text-gray-600 mt-8">No feedback available at the moment.</p>
+  {% endif %}
+</div>
 </section>
+
+
 
 <!-- Contact US Section -->
 <section class="bg-white py-16">

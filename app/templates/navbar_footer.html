@@ -12,7 +12,7 @@
   <nav class="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow sticky top-0 z-50">
     <div class="container mx-auto flex items-center justify-between px-4 py-3">
       <!-- Logo -->
-      <a href="/" class="text-2xl font-bold flex items-center">
+      <a href="{% url 'home' %}" class="text-2xl font-bold flex items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-8 h-8 mr-2">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20l4-16m-8 16l4-16m-4 12h8" />
         </svg>
@@ -21,13 +21,13 @@
 
       <!-- Navigation Links -->
       <ul class="hidden md:flex space-x-6">
-        <li><a href="/" class="hover:underline">Home</a></li>
-        <li><a href='albums/' class="hover:underline">Gallery</a></li>
-        <li><a href="past-solutions/" class="hover:underline">Past Solutions</a></li>
-        <li><a href='solutions/' class="hover:underline">Solutions</a></li>
-        <li><a href='article/' class="hover:underline">Articles</a></li>
-        <li><a href='contact_us/' class="hover:underline">Contact Us</a></li>
-        <li><a href='about_us/' class="hover:underline">About Us</a></li>
+        <li><a href="{% url 'home' %}" class="hover:underline">Home</a></li>
+        <li><a href="{% url 'album_list' %}" class="hover:underline">Gallery</a></li>
+        <li><a href="{% url 'past_solutions' %}" class="hover:underline">Past Solutions</a></li>
+        <li><a href="{% url 'solutions_list' %}" class="hover:underline">Solutions</a></li>
+        <li><a href="{% url 'article_list' %}" class="hover:underline">Articles</a></li>
+        <li><a href="{% url 'contact_us' %}" class="hover:underline">Contact Us</a></li>
+        <li><a href="{% url 'about_us' %}" class="hover:underline">About Us</a></li>
       </ul>
 
       <!-- Mobile Menu Toggle -->
@@ -41,12 +41,13 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden bg-blue-700 md:hidden">
       <ul class="flex flex-col space-y-2 py-2 text-center">
-        <li><a href="/" class="block py-2 text-white hover:bg-blue-800">Home</a></li>
-        <li><a href='albums/' class="block py-2 text-white hover:bg-blue-800">Gallery</a></li>
-        <li><a href="past-solutions/" class="block py-2 text-white hover:bg-blue-800">Past Solutions</a></li>
-        <li><a href='solutions/'class="block py-2 text-white hover:bg-blue-800">Solutions</a></li>
-        <li><a href='contact_us/' class="block py-2 text-white hover:bg-blue-800">Contact Us</a></li>
-        <li><a href="/about_us" class="block py-2 text-white hover:bg-blue-800">About Us</a></li>
+        <li><a href="{% url 'home' %}" class="block py-2 text-white hover:bg-blue-800">Home</a></li>
+        <li><a href="{% url 'album_list' %}" class="block py-2 text-white hover:bg-blue-800">Gallery</a></li>
+        <li><a href="{% url 'past_solutions' %}" class="block py-2 text-white hover:bg-blue-800">Past Solutions</a></li>
+        <li><a href="{% url 'solutions_list' %}" class="block py-2 text-white hover:bg-blue-800">Solutions</a></li>
+        <li><a href="{% url 'article_list' %}" class="block py-2 text-white hover:bg-blue-800">Articles</a></li>
+        <li><a href="{% url 'contact_us' %}" class="block py-2 text-white hover:bg-blue-800">Contact Us</a></li>
+        <li><a href="{% url 'about_us' %}" class="block py-2 text-white hover:bg-blue-800">About Us</a></li>
       </ul>
     </div>
   </nav>
@@ -60,12 +61,12 @@
     <div class="container mx-auto py-4 px-4 text-center">
       <!-- Links -->
       <div class="flex justify-center space-x-6 mb-2">
-        <a href="/" class="hover:underline">Home</a>
-        <a href="albums/" class="hover:underline">Gallery</a>
-        <a href="past-solutions/" class="hover:underline">Past Solutions</a>
-        <a href="solutions/" class="hover:underline">Solutions</a>
-        <a href="contact_us/" class="hover:underline">Contact Us</a>
-        <a href="about_us/" class="hover:underline">About Us</a>
+        <a href="{% url 'home' %}" class="hover:underline">Home</a>
+        <a href="{% url 'album_list' %}" class="hover:underline">Gallery</a>
+        <a href="{% url 'past_solutions' %}" class="hover:underline">Past Solutions</a>
+        <a href="{% url 'solutions_list' %}" class="hover:underline">Solutions</a>
+        <a href="{% url 'contact_us' %}" class="hover:underline">Contact Us</a>
+        <a href="{% url 'about_us' %}" class="hover:underline">About Us</a>
       </div>
 
       <!-- Social Media -->

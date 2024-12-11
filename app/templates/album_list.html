@@ -8,7 +8,7 @@
         <p class="mt-2 text-lg">Browse through our stunning albums and enjoy the memories</p>
     </header>
 
-    <!-- Main Content Section -->
+    <!-- Main Content Section --> 
     <main class="py-16">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
@@ -16,7 +16,11 @@
                 <div class="bg-white rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
                     <a href="{% url 'album_detail' album.id %}">
                         <div class="relative">
-                            <img src="{% if album.photo_set.first %}{{ album.photo_set.first.image.url }}{% else %}https://via.placeholder.com/300{% endif %}" alt="{{ album.name }}" class="w-full h-56 object-cover rounded-t-lg">
+                            <!-- Display album cover image -->
+                            <img 
+                                src="{% if album.image %}{{ album.image.url }}{% else %}https://via.placeholder.com/300{% endif %}" 
+                                alt="{{ album.name }}" 
+                                class="w-full h-56 object-cover rounded-t-lg">
                             <div class="absolute top-0 left-0 bg-blue-600 text-white py-2 px-4 rounded-br-lg">
                                 <p class="text-lg font-semibold">{{ album.name }}</p>
                             </div>
@@ -32,5 +36,6 @@
             </div>
         </div>
     </main>
+</body>
 
 {% endblock %}
