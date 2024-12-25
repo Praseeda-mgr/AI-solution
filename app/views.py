@@ -60,7 +60,7 @@ def feedback(request):
             return redirect('feedback_success')  
     else:
         form = FeedbackForm()
-    feedback_list = Feedback.objects.all().order_by('-created_at')  
+    feedback_list = Feedback.objects.filter(rating=rating) 
     return render(request, 'feedback.html', {'form': form, 'feedback_list': feedback_list})
 
 def solution_detail(request, id):
