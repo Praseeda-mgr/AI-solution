@@ -11,8 +11,10 @@ def about_us(request):
 def home(request):
     articles = Article.objects.all()[:4]
     solutions = Solution.objects.all()
+
     form = CustomerInquiryForm()
-    return render(request, "home.html", {"solutions": solutions, "form": form, 'articles': articles})
+    feedbacks = Feedback.objects.all()[:4]
+    return render(request, "home.html", {"solutions": solutions, "form": form, 'articles': articles,"feedbacks":feedbacks})
 
 
 def contact_us(request):
