@@ -56,31 +56,36 @@
   {% block content %}
   {% endblock %}
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 text-gray-200 mt-auto">
-    <div class="container mx-auto py-4 px-4 text-center">
-      <!-- Links -->
-      <div class="flex justify-center space-x-6 mb-2">
-        <a href="{% url 'home' %}" class="hover:underline">Home</a>
-        <a href="{% url 'album_list' %}" class="hover:underline">Events</a>
-        <a href="{% url 'past_solutions' %}" class="hover:underline">Past Solutions</a>
-        <a href="{% url 'solutions_list' %}" class="hover:underline">Solutions</a>
-        <a href="{% url 'contact_us' %}" class="hover:underline">Contact Us</a>
-        <a href="{% url 'about_us' %}" class="hover:underline">About Us</a>
-      </div>
-
-      <!-- Social Media -->
-      <div class="flex justify-center space-x-4">
-        <a href="#" class="text-blue-500 hover:text-blue-300"><i class="fab fa-facebook"></i></a>
-        <a href="#" class="text-blue-400 hover:text-blue-200"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="text-pink-500 hover:text-pink-300"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="text-blue-700 hover:text-blue-500"><i class="fab fa-linkedin"></i></a>
-      </div>
-
-      <!-- Copyright -->
-      <p class="mt-2 text-sm">&copy; 2024 AI Solutions. All Rights Reserved.</p>
+<!-- Footer -->
+<footer class="bg-gradient-to-r from-blue-800 via-purple-800 to-blue-800 text-gray-200 mt-auto">
+  <div class="container mx-auto py-8 px-4 text-center">
+    <!-- Links -->
+    <div class="flex justify-center space-x-6 mb-4">
+      <a href="{% url 'home' %}" class="hover:text-yellow-300 font-semibold">Home</a>
+      <a href="{% url 'album_list' %}" class="hover:text-yellow-300 font-semibold">Events</a>
+      <a href="{% url 'past_solutions' %}" class="hover:text-yellow-300 font-semibold">Past Solutions</a>
+      <a href="{% url 'solutions_list' %}" class="hover:text-yellow-300 font-semibold">Solutions</a>
+      <a href="{% url 'contact_us' %}" class="hover:text-yellow-300 font-semibold">Contact Us</a>
+      <a href="{% url 'about_us' %}" class="hover:text-yellow-300 font-semibold">About Us</a>
     </div>
-  </footer>
+
+    <!-- Social Media -->
+    <div class="flex justify-center space-x-6 mb-4">
+      <a href="#" class="text-blue-400 hover:text-blue-200 text-2xl"><i class="fab fa-facebook"></i></a>
+      <a href="#" class="text-blue-300 hover:text-blue-100 text-2xl"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="text-pink-500 hover:text-pink-300 text-2xl"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="text-blue-700 hover:text-blue-500 text-2xl"><i class="fab fa-linkedin"></i></a>
+    </div>
+
+    <!-- Decorative Divider -->
+    <div class="border-t border-gray-400 opacity-50 my-4"></div>
+
+    <!-- Copyright -->
+    <p class="text-sm font-light text-gray-300">
+      &copy; 2024 <span class="font-semibold text-yellow-300">AI Solutions</span>. All Rights Reserved.
+    </p>
+  </div>
+</footer>
 
   <!-- JavaScript for Mobile Menu -->
   <script>
