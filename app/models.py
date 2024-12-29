@@ -55,6 +55,10 @@ class CustomerInquiry(models.Model):
     country = models.CharField(max_length=100)
     job_title = models.CharField(max_length=100)
     job_details = models.TextField()
+    message = models.TextField(blank=True, null=True)  # New field for additional messages
+
+    def __str__(self):
+        return f"{self.name} - {self.company_name}"
 
 
 class Feedback(models.Model):

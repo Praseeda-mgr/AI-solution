@@ -36,3 +36,6 @@ class FeedbackAdmin(admin.ModelAdmin):
     search_fields = ('customer_name', 'message') 
     list_filter = ('rating',)  
 
+class CustomerInquiryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'company_name', 'job_title', 'country')
+    search_fields = ('name', 'email', 'company_name', 'job_title')
