@@ -62,8 +62,10 @@ def feedback(request):
             return redirect('feedback_success')  
     else:
         form = FeedbackForm()
-    feedback_list = Feedback.objects.filter(rating=rating) 
+    feedback_list = Feedback.objects.all()  
+
     return render(request, 'feedback.html', {'form': form, 'feedback_list': feedback_list})
+
 
 def solution_detail(request, id):
     solution = get_object_or_404(Solution, id=id)
