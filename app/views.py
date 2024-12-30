@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Solution,PastSolution, CustomerInquiry, Article, Feedback, Album
+from .models import Solution,PastSolution, CustomerInquiry, Article, Feedback, Album, Event
 from .forms import CustomerInquiryForm, FeedbackForm
-
+from datetime import date
 def navbar_footer(request):
     return render(request, 'navbar_footer.html')
 
@@ -63,7 +63,6 @@ def feedback(request):
     else:
         form = FeedbackForm()
     feedback_list = Feedback.objects.all()  
-
     return render(request, 'feedback.html', {'form': form, 'feedback_list': feedback_list})
 
 
@@ -80,3 +79,12 @@ def album_detail(request, album_id):
     album = get_object_or_404(Album, pk=album_id)
     photos = album.photos.all() 
     return render(request, 'album_detail.html', {'album': album, 'photos': photos})
+
+def events(request):
+    today = date.today()
+    upcoming_events = Event.objects.filter(event_type='upcoming', date__gte=today).order_by('date')
+    past_events = Event.objects.filter(event_type='past', date__lt=today).order_by('-date')
+    return render(request, 'events.html', {
+        'upcoming_events': upcoming_events,
+        'past_events': past_events,
+    })

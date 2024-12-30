@@ -16,7 +16,6 @@ class PastSolution(models.Model):
     industry = models.CharField(max_length=200)
     description = models.TextField()
     image = models.ImageField(upload_to='past_solutions/', blank=True, null=True)
-
     def __str__(self):
         return self.title or "Untitled"
 
@@ -32,7 +31,6 @@ class Album(models.Model):
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='event_photos/', blank=True, null=True) 
     created_at = models.DateTimeField(auto_now_add=True)
-
     def __str__(self):
         return self.name
 
@@ -41,10 +39,8 @@ class Photo(models.Model):
     image = models.ImageField(upload_to='album_photos/')
     caption = models.CharField(max_length=200, blank=True, null=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
-
     def __str__(self):
         return f"Photo in {self.album.name if self.album else 'No Album'}"
-
 
 
 class CustomerInquiry(models.Model):
@@ -56,7 +52,6 @@ class CustomerInquiry(models.Model):
     job_title = models.CharField(max_length=100)
     job_details = models.TextField()
     message = models.TextField(blank=True, null=True)  # New field for additional messages
-
     def __str__(self):
         return f"{self.name} - {self.company_name}"
 
@@ -66,8 +61,21 @@ class Feedback(models.Model):
     rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)])  
     message = models.TextField(blank=True)  
     created_at = models.DateTimeField(auto_now_add=True) 
-
     def __str__(self):
         return f"{self.name} - {self.rating} Stars"
 
 
+class Event(models.Model):
+    EVENT_TYPE_CHOICES = [
+        ('upcoming', 'Upcoming'),
+        ('past', 'Past'),
+    ]
+
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    date = models.DateField()
+    event_type = models.CharField(max_length=10, choices=EVENT_TYPE_CHOICES)
+    image = models.ImageField(upload_to='event_images/', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.title

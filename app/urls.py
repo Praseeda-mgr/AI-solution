@@ -5,6 +5,7 @@ urlpatterns = [
     path('navbar_footer/', navbar_footer, name='navbar_footer'),
     path("about_us/", about_us, name='about_us'),
     path("", home, name="home"),
+    path('events/', events, name='events'),
     path('contact_us/', contact_us, name="contact_us"),
     path('solutions/', solutions_list, name='solutions_list'),
         path('solutions/<int:id>/', solution_detail, name='solution_detail'),

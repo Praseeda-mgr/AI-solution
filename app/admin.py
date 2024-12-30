@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Solution, PastSolution, Article, CustomerInquiry, Feedback, Album, Photo
+from .models import Solution, PastSolution, Article, CustomerInquiry, Feedback, Album, Photo, Event
 
 admin.site.register(Solution)
 admin.site.register(PastSolution)
@@ -9,6 +9,7 @@ admin.site.register(CustomerInquiry)
 admin.site.register(Feedback)
 admin.site.register(Album)
 admin.site.register(Photo)
+admin.site.register(Event)
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'writer', 'published_date')
@@ -39,3 +40,8 @@ class FeedbackAdmin(admin.ModelAdmin):
 class CustomerInquiryAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'company_name', 'job_title', 'country')
     search_fields = ('name', 'email', 'company_name', 'job_title')
+
+class EventAdmin(admin.ModelAdmin):
+    list_display = ('title', 'date', 'event_type', 'created_at')
+    list_filter = ('event_type',)
+    search_fields = ('title', 'description')
