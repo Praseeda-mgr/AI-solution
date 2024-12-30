@@ -4,7 +4,7 @@ from .models import CustomerInquiry, Article, Feedback
 class CustomerInquiryForm(forms.ModelForm):
     class Meta:
         model = CustomerInquiry
-        fields = ['name', 'email', 'phone_number', 'company_name', 'country', 'job_title', 'job_details']
+        fields = ['name', 'email', 'phone_number', 'company_name', 'country', 'job_title', 'job_details', 'message']
 
 class ArticleForm(forms.ModelForm):
     class Meta:
